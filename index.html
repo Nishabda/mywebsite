@@ -62,7 +62,7 @@
       transition: background var(--transition), border-color var(--transition);
       gap: 1rem;
     }
-    .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--accent); letter-spacing: -0.02em; white-space: nowrap; }
+    .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--accent); letter-spacing: -0.02em; white-space: nowrap; text-decoration: none; }
     .nav-right { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 600; color: var(--ink-muted); letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; white-space: nowrap; }
@@ -224,7 +224,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">nishabda.dev</div>
+  <a href="#hero" class="nav-logo">nishabda.dev</a>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#projects">Work</a></li>
@@ -251,10 +251,10 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-content">
     <div class="hero-tag">Open to Learning & Collaborating</div>
-    <h1>Hi, I'm <span>Nishabda</span> .<br>CS Student &<br>Aspiring Developer.</h1>
+    <h1>Hi, I'm <span>Nishabda</span> <br>CS Student &<br>Aspiring Developer.</h1>
     <p class="hero-desc">
       Passionate about cybersecurity and AI-integrated development. Building skills one project at a time, with a love for solving real-world problems through code.
     </p>
@@ -388,13 +388,13 @@
       <div class="section-label">// about me</div>
       <div class="section-title" style="margin-bottom:1.2rem">Student. Builder.<br>Security Enthusiast.</div>
       <p>
-        I'm Nishabda Shrestha, a Computer Science student on a mission to understand how technology works — and how to make it safer and smarter.
+        I'm Nishabda Shrestha, a Computer Science student on a mission to understand how technology works, and how to make it safer and smarter.
       </p>
       <p>
         My two biggest passions are cybersecurity and AI-integrated coding. I love the challenge of thinking like an attacker to build better defenses, and I'm fascinated by how AI can be woven into everyday tools.
       </p>
       <p>
-        Every project I build is a step forward. I'm just getting started — and that's the most exciting part.
+        Every project I build is a step forward. I'm just getting started, and that's the most exciting part.
       </p>
       <a href="#contact" class="btn btn-primary" style="margin-top:1rem">Let's Connect →</a>
     </div>
