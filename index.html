@@ -160,8 +160,33 @@
     .tag { font-family: 'DM Mono', monospace; font-size: 0.68rem; background: var(--surface); color: var(--ink-muted); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 99px; transition: background var(--transition); }
     .project-name { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.45rem; }
     .project-desc { font-family: 'DM Mono', monospace; font-size: 0.79rem; color: var(--ink-muted); line-height: 1.65; }
-    .project-link { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1rem; font-size: 0.79rem; font-weight: 700; color: var(--accent); text-decoration: none; transition: gap 0.2s; }
+    .project-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.79rem; font-weight: 700; color: var(--accent); text-decoration: none; transition: gap 0.2s; }
     .project-link:hover { gap: 0.6rem; }
+
+    .project-actions { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+
+    .btn-demo {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 500;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 99px; padding: 0.4rem 1rem;
+      cursor: pointer; transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-demo:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-demo[aria-expanded="true"] { background: var(--surface2); color: var(--accent); border: 1px solid var(--accent-border); }
+    .btn-demo[aria-expanded="true"] .demo-icon { transform: rotate(90deg); }
+    .demo-icon { display: inline-block; transition: transform 0.25s; font-size: 0.65rem; }
+
+    .live-tag { background: rgba(34,197,94,0.15) !important; color: #22c55e !important; border-color: rgba(34,197,94,0.35) !important; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+    .demo-embed { margin-top: 1rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); }
+    .demo-embed-inner { display: flex; flex-direction: column; }
+    .demo-embed iframe { width: 100%; height: 480px; border: none; display: block; }
+    .demo-fullscreen { display: block; text-align: right; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); text-decoration: none; padding: 0.5rem 0.8rem; border-top: 1px solid var(--border); transition: opacity 0.2s; }
+    .demo-fullscreen:hover { opacity: 0.7; }
+
+    .project-card--featured { border-color: var(--accent-border); }
 
     /* SKILLS */
     #skills { background: var(--surface); transition: background var(--transition); }
@@ -291,13 +316,29 @@
   <div class="section-title">Projects I've Built</div>
   <div class="projects-grid">
 
-    <div class="project-card">
+    <div class="project-card project-card--featured">
       <div class="project-thumb thumb-1">🔐</div>
       <div class="project-body">
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">Security</span></div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Security</span><span class="tag live-tag">● Live</span></div>
         <div class="project-name">Password Strength Checker</div>
         <p class="project-desc">Analyses password strength, detects common patterns, and suggests more secure alternatives using Python.</p>
-        <a href="https://github.com/Nishabda" class="project-link" target="_blank">View on GitHub →</a>
+        <div class="project-actions">
+          <button class="btn-demo" onclick="toggleDemo(this)" aria-expanded="false">
+            <span class="demo-icon">▶</span> Try Live Demo
+          </button>
+          <a href="https://github.com/Nishabda" class="project-link" target="_blank">GitHub →</a>
+        </div>
+        <div class="demo-embed" style="display:none;">
+          <div class="demo-embed-inner">
+            <iframe
+              src="https://passpulse-checker.streamlit.app/?embed=true"
+              title="PassPulse – Password Strength Checker"
+              loading="lazy"
+              allow="clipboard-write"
+            ></iframe>
+            <a href="https://passpulse-checker.streamlit.app/" class="demo-fullscreen" target="_blank" rel="noopener">Open full screen ↗</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -419,6 +460,15 @@
 </footer>
 
 <script>
+  function toggleDemo(btn) {
+    const embed = btn.closest('.project-body').querySelector('.demo-embed');
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    btn.querySelector('span:last-child').textContent = expanded ? ' Try Live Demo' : ' Close Demo';
+    embed.style.display = expanded ? 'none' : 'block';
+    if (!expanded) embed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
