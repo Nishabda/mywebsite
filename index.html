@@ -463,9 +463,11 @@
   function toggleDemo(btn) {
     const embed = btn.closest('.project-body').querySelector('.demo-embed');
     const expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', !expanded);
-    btn.querySelector('span:last-child').textContent = expanded ? ' Try Live Demo' : ' Close Demo';
-    embed.style.display = expanded ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.innerHTML = !expanded
+      ? '<span class="demo-icon">▶</span> Close Demo'
+      : '<span class="demo-icon">▶</span> Try Live Demo';
+    embed.style.display = !expanded ? 'block' : 'none';
     if (!expanded) embed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
